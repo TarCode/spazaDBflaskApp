@@ -1,0 +1,40 @@
+body{
+	background-color: #999;
+	color: #001;
+}
+
+.tblBtn{
+	width: 100%;
+	height: 7em;
+	padding-top: 2.5em;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 1em;
+	border-radius: 0px;
+}
+
+.backBtn{
+	float: right;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 1em;
+	border-radius: 0px;
+}
+
+.loginBtn{
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 1em;
+	border-radius: 0px;
+}
+
+.logo{
+	padding: 1.5em;
+}
+
+.loginForm input{
+	height: 2em;
+	width: 12em;
+	font-size: 20px;
+	margin-bottom: 0.5em;
+}

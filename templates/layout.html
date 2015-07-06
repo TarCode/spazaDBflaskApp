@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Nelisa's Spaza</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<div class= "container">
+  <div class = "row">
+  	<div class = "col-xs-4"></div>
+  	<div class = "col-xs-4">
+  		<a href = "/"><img class = "img-responsive logo" src = "{{ url_for('static', filename='spaza.png') }}"></a>
+  	</div>	
+  	<div class = "col-xs-4"></div>
+  </div>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

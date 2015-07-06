@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class = "container">
+  <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+    <table class = "table table-bordered table-striped">
+      <tr>
+        <th>Category ID</th>
+        <th>Category Name</th>
+      </tr>
+    {% for entry in entries %}
+      <tr>
+        <td>{{ entry.cat_id }}</td>
+        <td>{{ entry.cat_name}}</td>
+      </tr>
+    {% else %}
+      <em>Unbelievable.  No entries here so far</em>
+    {% endfor %}
+    </table>
+  
+    
+  </div>
+{% endblock %}
