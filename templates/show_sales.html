@@ -1,0 +1,32 @@
+{% if session['name'] %}
+{% extends "layout.html" %}
+{% block body %}
+  <div class = "container">
+  <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+    <table class = "table table-bordered table-striped">
+      <tr>
+        <th>Sale ID</th>
+        <th>Product Name</th>
+        <th>Day</th>
+        <th>Date</th>
+        <th>Number Sold</th>
+        <th>Sale Price</th>
+      </tr>
+    {% for entry in entries %}
+      <tr>
+        <td>{{ entry.sale_id }}</td>
+        <td>{{ entry.prod_name}}</td>
+        <td>{{ entry.day}}</td>
+        <td>{{ entry.date}}</td>
+        <td>{{ entry.qtySold}}</td>
+        <td>{{ entry.salePrice}}</td>
+      </tr>
+    {% else %}
+      <em>Unbelievable.  No entries here so far</em>
+    {% endfor %}
+    </table>
+  
+    
+  </div>
+{% endblock %}
+{% endif %}
