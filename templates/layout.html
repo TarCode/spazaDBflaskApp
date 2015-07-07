@@ -3,6 +3,9 @@
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 <div class= "container">
+  {% if session['name'] %}
+    <div class = "navbar navbar-fixed-top"><p>Hello there, <strong>{{session['name']}}</p></strong><a class="btn btn-default logoutBtn" href="/clear" role="button">Logout</a></div>
+  {% endif %}
   <div class = "row">
   	<div class = "col-xs-4"></div>
   	<div class = "col-xs-4">
@@ -13,5 +16,6 @@
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
   {% endfor %}
+
   {% block body %}{% endblock %}
 </div>

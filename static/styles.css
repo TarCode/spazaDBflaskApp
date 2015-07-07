@@ -1,6 +1,6 @@
 body{
-	background-color: #999;
-	color: #001;
+	background-color: #5b5494;
+	color: #0D083B;
 }
 
 .tblBtn{
@@ -21,15 +21,26 @@ body{
 	border-radius: 0px;
 }
 
+.logoutBtn{
+	float: right;
+	margin-top: 0px;
+	font-size: 12px;
+	margin-right: 10px;
+	margin-bottom: 3px;
+	border-radius: 0px;
+}
+
 .loginBtn{
 	font-size: 1.5em;
 	font-weight: bold;
 	margin-bottom: 1em;
 	border-radius: 0px;
+	width: 6em;
 }
 
 .logo{
 	padding: 1.5em;
+	margin-top: 30px;
 }
 
 .loginForm input{
@@ -37,4 +48,50 @@ body{
 	width: 12em;
 	font-size: 20px;
 	margin-bottom: 0.5em;
+}
+
+.navbar{
+	background-color: #1F1959;
+	color: #fff;
+	padding: 3px;
+	padding-top: 10px;
+}
+
+.navbar p{
+	float: left;
+	margin-left: 10px;
+}
+
+strong{
+	color: #990;
+}
+
+.btn-primary{
+	background-color: #554200;
+	border: 0px;
+}
+
+.btn-success{
+	background-color: #806815;
+	border: 0px;
+}
+
+.btn-danger{
+	background-color: #AA9139;
+	border: 0px;
+}
+
+.btn-primary:hover{
+	color: #554200;
+	background-color: #fff;
+}
+
+.btn-success:hover{
+	color: #554200;
+	background-color: #fff;
+}
+
+.btn-danger:hover{
+	color: #554200;
+	background-color: #fff;
 }

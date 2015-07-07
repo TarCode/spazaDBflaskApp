@@ -5,6 +5,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+app.secret_key = 'd4rthV4d3rIsYourF4th3r'
+
 mysql = MySQL(app)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_PORT'] = 3306
@@ -36,8 +38,11 @@ def login():
 		entries = [dict(password=row[0]) for row in cur.fetchall()]
 		print entries
 		if entries != [] and request.form['username'] != None or request.form['password'] != None:
-			if request.form['password'] == entries[0]['password']:		
-	    			return render_template('menu.html')
+			if request.form['password'] == entries[0]['password']:
+			    session['name'] = request.form['username']
+			    # And then redirect the user to the main page
+			    return redirect(url_for('show_menu'))
+					  
 	    	else:
 	    		return render_template('login.html', msg = "Incorrect Login")			
 	else:
@@ -68,6 +73,13 @@ def show_suppliers():
 	cur.execute('''SELECT * FROM supplier''')
 	entries = [dict(supplier_id=row[0], supplier_name=row[1]) for row in cur.fetchall()]
     	return render_template('show_suppliers.html', entries=entries)    	    		
+
+@app.route('/clear')
+def clearsession():
+    # Clear the session
+    session.clear()
+    # Redirect the user to the main page
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
 

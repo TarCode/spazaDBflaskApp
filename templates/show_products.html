@@ -1,3 +1,4 @@
+{% if session['name'] %}
 {% extends "layout.html" %}
 {% block body %}
   <div class = "container">
@@ -22,3 +23,4 @@
     
   </div>
 {% endblock %}
+{% endif %}
