@@ -1,8 +1,10 @@
 from flask.ext.mysqldb import MySQL
+from flask.ext.bcrypt import Bcrypt
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.config.from_object(__name__)
 
 app.secret_key = 'd4rthV4d3rIsYourF4th3r'
@@ -29,10 +31,14 @@ def show_landing():
 @app.route('/signUp', methods = ['GET', 'POST'])
 def signUp():
 	if request.method == 'POST':
-		cur = mysql.connection.cursor()
-		cur.execute('''INSERT INTO users VALUES (%s, %s) ''', (request.form['username'], request.form['password']))
-		mysql.connection.commit()
-		return redirect(url_for('login'))
+		if(request.form['password'] == request.form['password2']):
+			pw_hash = bcrypt.generate_password_hash(request.form['password'],10)
+			cur = mysql.connection.cursor()
+			cur.execute('''INSERT INTO users VALUES (%s, %s) ''', (request.form['username'], pw_hash))
+			mysql.connection.commit()
+			return redirect(url_for('login'))
+		else:
+			return render_template('signUp.html', msg = "Passwords do not match")
 	else:	
     		return render_template('signUp.html')    
 
@@ -44,7 +50,8 @@ def login():
 		entries = [dict(password=row[0]) for row in cur.fetchall()]
 		
 		if entries != [] and request.form['username'] != None and request.form['password'] != None:
-			if request.form['password'] == entries[0]['password']:
+			pw_hash = entries[0]['password']
+			if bcrypt.check_password_hash(pw_hash, request.form['password']):
 			    session['name'] = request.form['username']
 			    # And then redirect the user to the main page
 			    return redirect(url_for('show_menu'))
