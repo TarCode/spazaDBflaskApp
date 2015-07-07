@@ -28,7 +28,13 @@ def show_landing():
 
 @app.route('/signUp', methods = ['GET', 'POST'])
 def signUp():
-    return render_template('signUp.html')    
+	if request.method == 'POST':
+		cur = mysql.connection.cursor()
+		cur.execute('''INSERT INTO users VALUES (%s, %s) ''', (request.form['username'], request.form['password']))
+		mysql.connection.commit()
+		return redirect(url_for('login'))
+	else:	
+    		return render_template('signUp.html')    
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

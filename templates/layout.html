@@ -7,11 +7,11 @@
     <div class = "navbar navbar-fixed-top"><p>Hello there, <strong>{{session['name']}}</p></strong><a class="btn btn-default logoutBtn" href="/clear" role="button">Logout</a></div>
   {% endif %}
   <div class = "row">
-  	<div class = "col-xs-4"></div>
-  	<div class = "col-xs-4">
+  	<div class = "col-xs-2"></div>
+  	<div class = "col-xs-8">
   		<a href = "/"><img class = "img-responsive logo" src = "{{ url_for('static', filename='spaza.png') }}"></a>
   	</div>	
-  	<div class = "col-xs-4"></div>
+  	<div class = "col-xs-2"></div>
   </div>
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
