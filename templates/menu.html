@@ -1,15 +1,14 @@
 {% if session['name'] %}
 {% extends "layout.html" %}
 {% block body %}
-
 <div class = "row">
-	<div class = "col-xs-4">
+	<div class = "col-xs-12 col-md-4">
 		<a class="btn btn-primary tblBtn" href="/products" role="button">Products</a>
 	</div>
-	<div class = "col-xs-4">
+	<div class = "col-xs-12 col-md-4">
 		<a class="btn btn-success tblBtn" href="/categories" role="button">Categories</a>
 	</div>
-	<div class = "col-xs-4">
+	<div class = "col-xs-12 col-md-4">
 		<a class="btn btn-danger tblBtn" href="/suppliers" role="button">Suppliers</a>
 	</div>
 </div>	

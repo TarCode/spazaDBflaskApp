@@ -42,17 +42,22 @@ def login():
 		cur = mysql.connection.cursor()
 		cur.execute('''SELECT password FROM users WHERE username = \"%s\" ''' %request.form['username'])
 		entries = [dict(password=row[0]) for row in cur.fetchall()]
-		print entries
-		if entries != [] and request.form['username'] != None or request.form['password'] != None:
+		
+		if entries != [] and request.form['username'] != None and request.form['password'] != None:
 			if request.form['password'] == entries[0]['password']:
 			    session['name'] = request.form['username']
 			    # And then redirect the user to the main page
 			    return redirect(url_for('show_menu'))
-					  
+			elif request.form['password'] != entries[0]['password']:
+				return render_template('login.html', msg = "Incorrect Login")
 	    	else:
 	    		return render_template('login.html', msg = "Incorrect Login")			
 	else:
-	    return render_template('login.html')
+		if session:
+			return redirect(url_for('show_menu'))
+		else:
+			return render_template('login.html')
+	    		return render_template('login.html')
         
 
 @app.route('/menu')
@@ -88,5 +93,7 @@ def clearsession():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-
-	app.run(debug=True)
+	
+	app.run(debug=True, 
+	host="172.18.0.224",
+    port=int("5000"))
