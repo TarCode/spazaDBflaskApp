@@ -21,6 +21,13 @@ body{
 	border-radius: 0px;
 }
 
+.addBtn{
+	height: 2.5em;
+	font-weight: bold;
+	margin-bottom: 5px;
+	border-radius: 0px;
+}
+
 .logoutBtn{
 	float: right;
 	margin-top: 0px;

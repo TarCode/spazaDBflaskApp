@@ -3,20 +3,221 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<script src="{{ url_for('static', filename='jquery-1.10.2.js') }}"></script>
+<script src="{{ url_for('static', filename='handlebars-v3.0.3.js') }}"></script>
+
+{% raw %}
+
+  <script id="home-screen" type="text/x-handlebars-template">
+   <div class = "row">
+    <div class = "col-xs-12 col-md-4">
+      <a class="btn btn-primary tblBtn" href="#" role="button" id="products" >Products</a>
+    </div>
+    <div class = "col-xs-12 col-md-4">
+      <a class="btn btn-success tblBtn" href="#" role="button" id="categories">Categories</a>
+    </div>
+    <div class = "col-xs-12 col-md-4">
+      <a class="btn btn-danger tblBtn" href="#" role="button" id="suppliers">Suppliers</a>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-xs-12 col-md-6">
+      <a class="btn btn-primary tblBtn" href="#" role="button" id="sales">Sales</a>
+    </div>
+    <div class = "col-xs-12 col-md-6">
+      <a class="btn btn-success tblBtn" href="#" role="button" id = "purchases">Purchases</a>
+    </div>
+  </div>
+  </script>
+
+
+  <script id="product-list" type="text/x-handlebars-template">
+   <a class="btn btn-default backBtn" role="button" id = "backBtn">Back</a>
+   <h1 class = "text-center">Products</h1>
+   <table class = "table table-bordered table-striped">
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Category ID</th>
+        </tr>
+      {{#each products}}
+        <tr>
+          <td>{{ this.prod_id }}</td>
+          <td>{{ this.prod_name}}</td>
+          <td>{{ this.cat_id }}</td>
+        </tr>
+      {{/each}}
+      </table>
+  </script>
+
+  <script id="category-list" type="text/x-handlebars-template">
+     <a class="btn btn-default backBtn" role="button" id = "backBtn">Back</a>
+     <h1 class = "text-center">Categories</h1>
+     <table class = "table table-bordered table-striped">
+       <tr>
+         <th>Category ID</th>
+         <th>Category Name</th>
+       </tr>
+     {{#each categories}}
+       <tr>
+         <td>{{this.cat_id }}</td>
+         <td>{{this.cat_name}}</td>
+       </tr>
+     {{/each}}
+     </table>
+  </script>
+
+  <script id="supplier-list" type="text/x-handlebars-template">
+     <a class="btn btn-default backBtn" role="button" id = "backBtn">Back</a>
+     <h1 class = "text-center">Suppliers</h1>
+     <table class = "table table-bordered table-striped">
+       <tr>
+         <th>Supplier ID</th>
+         <th>Supplier Name</th>
+       </tr>
+     {{#each suppliers}}
+       <tr>
+         <td>{{ this.supplier_id }}</td>
+         <td>{{ this.supplier_name}}</td>
+       </tr>
+     {{/each}}
+     </table>
+  </script>
+
+  <script id="sales-list" type="text/x-handlebars-template">
+   <a class="btn btn-default backBtn" role="button" id = "backBtn">Back</a>
+     <h1 class = "text-center">Sales</h1>
+     <table class = "table table-bordered table-striped">
+       <tr>
+         <th>Sale ID</th>
+         <th>Product Name</th>
+         <th>Day</th>
+         <th>Date</th>
+         <th>Number Sold</th>
+         <th>Sale Price</th>
+       </tr>
+     {{#each sales}}
+       <tr>
+         <td>{{ this.sale_id }}</td>
+         <td>{{ this.prod_name}}</td>
+         <td>{{ this.day}}</td>
+         <td>{{ this.date}}</td>
+         <td>{{ this.qtySold}}</td>
+         <td>{{ this.salePrice}}</td>
+       </tr>
+     {{/each}}
+     </table>
+  </script>
+
+  <script id="purchase-list" type="text/x-handlebars-template">
+     <a class="btn btn-default backBtn" role="button" id = "backBtn">Back</a>
+     <h1 class = "text-center">Purchases</h1>
+     <table class = "table table-bordered table-striped">
+       <tr>
+         <th>Purchase ID</th>
+         <th>Product Name</th>
+         <th>Date</th>
+         <th>Quantity</th>
+         <th>Cost Price</th>
+         <th>Total Cost</th>
+       </tr>
+     {{#each  purchases}}
+       <tr>
+         <td>{{ this.purchase_id}}</td>
+         <td>{{ this.prod_name}}</td>
+         <td>{{ this.date}}</td>
+         <td>{{ this.quantity}}</td>
+         <td>{{ this.cost}}</td>
+         <td>{{ this.totalCost}}</td>
+       </tr>
+     {{/each}}
+     </table>
+  </script>
+
+{% endraw %}
+
 <div class= "container">
-  {% if session['name'] %}
-    <div class = "navbar navbar-fixed-top"><p>Hello there, <strong>{{session['name']}}</p></strong><a class="btn btn-default logoutBtn" href="/clear" role="button">Logout</a></div>
-  {% endif %}
   <div class = "row">
   	<div class = "col-xs-0 col-md-2"></div>
   	<div class = "col-xs-12 col-md-8">
-  		<a href = "/login"><img class = "img-responsive logo" src = "{{ url_for('static', filename='spaza.png') }}"></a>
-  	</div>	
+  		<a><img class = "img-responsive logo" src = "{{ url_for('static', filename='spaza.png') }}"></a>
+  	</div>
   	<div class = "col-xs-0 col-md-2"></div>
   </div>
-  {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
-  {% endfor %}
 
-  {% block body %}{% endblock %}
+  <div id="app"></div>
+
+  <script type="text/javascript">
+    $(function() {
+
+        var home = $("#home-screen").html();
+        var homeTemplate = Handlebars.compile(home);
+
+        var products = $("#product-list").html();
+        var prodTemplate = Handlebars.compile(products);
+
+        var categories = $("#category-list").html();
+        var catTemplate = Handlebars.compile(categories);
+
+        var suppliers = $("#supplier-list").html();
+        var suppTemplate = Handlebars.compile(suppliers);
+
+        var sales = $("#sales-list").html();
+        var saleTemplate = Handlebars.compile(sales);
+
+        var purchase = $("#purchase-list").html();
+        var purchaseTemplate = Handlebars.compile(purchase);
+
+        function loadApp(){
+
+          $("#app").html(homeTemplate({}));
+
+          $("#backBtn").click(function(){
+            $.get('/', function(){
+              $("#app").html(homeTemplate({}));
+            });
+          });
+
+          $("#products").click(function(){
+            $.get('/api/products', function(data){
+              var html = prodTemplate({ products : data.products});
+              $("#app").html(html);
+            });
+          });
+
+          $("#categories").click(function(){
+            $.get('/api/categories', function(data){
+              var html = catTemplate({ categories : data.categories});
+              $("#app").html(html);
+            });
+          });
+
+          $("#suppliers").click(function(){
+            $.get('/api/suppliers', function(data){
+              var html = suppTemplate({ suppliers : data.suppliers});
+              $("#app").html(html);
+            });
+          });
+
+          $("#sales").click(function(){
+            $.get('/api/sales', function(data){
+              var html = saleTemplate({ sales : data.sales});
+              $("#app").html(html);
+            });
+          });
+
+          $("#purchases").click(function(){
+            $.get('/api/purchases', function(data){
+              var html = purchaseTemplate({ purchases : data.purchases});
+              $("#app").html(html);
+            });
+          });
+        }
+
+        loadApp();
+    })
+  </script>
+
+
 </div>
