@@ -173,10 +173,14 @@
 
           $("#app").html(homeTemplate({}));
 
+          var urlRoute = "http://172.18.0.224:5000"
 
+          var getUrl = function (url) {
+            return urlRoute + url;
+          }
 
           $("#products").click(function(){
-            $.get('/api/products', function(data){
+            $.get(getUrl('/api/products'), function(data){
               var html = prodTemplate({ products : data.products});
               $("#app").html(html);
               $("#backBtn").click(function(){
@@ -186,7 +190,7 @@
           });
 
           $("#categories").click(function(){
-            $.get('/api/categories', function(data){
+            $.get(getUrl('/api/categories'), function(data){
               var html = catTemplate({ categories : data.categories});
               $("#app").html(html);
               $("#backBtn").click(function(){
@@ -196,7 +200,7 @@
           });
 
           $("#suppliers").click(function(){
-            $.get('/api/suppliers', function(data){
+            $.get(getUrl('/api/suppliers'), function(data){
               var html = suppTemplate({ suppliers : data.suppliers});
               $("#app").html(html);
               $("#backBtn").click(function(){
@@ -206,7 +210,7 @@
           });
 
           $("#sales").click(function(){
-            $.get('/api/sales', function(data){
+            $.get(getUrl('/api/sales'), function(data){
               var html = saleTemplate({ sales : data.sales});
               $("#app").html(html);
               $("#backBtn").click(function(){
@@ -216,7 +220,7 @@
           });
 
           $("#purchases").click(function(){
-            $.get('/api/purchases', function(data){
+            $.get(getUrl('/api/purchases'), function(data){
               var html = purchaseTemplate({ purchases : data.purchases});
               $("#app").html(html);
               $("#backBtn").click(function(){
