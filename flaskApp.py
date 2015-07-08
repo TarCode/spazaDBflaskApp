@@ -21,6 +21,7 @@ app.config['MYSQL_DB'] = 'nelisaFlask'
 def show_landing():
     	return render_template('layout.html')
 
+#API Routes
 @app.route('/api/products')
 def show_products_api():
 	cur = mysql.connection.cursor()
@@ -30,10 +31,10 @@ def show_products_api():
 
 @app.route('/api/categories')
 def show_categories_api():
-		cur = mysql.connection.cursor()
-		cur.execute('''SELECT * FROM category''')
-		entries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
-	    	return jsonify(categories=entries)
+	cur = mysql.connection.cursor()
+	cur.execute('''SELECT * FROM category''')
+	entries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
+    	return jsonify(categories=entries)
 
 @app.route('/api/suppliers')
 def show_suppliers_api():
@@ -45,15 +46,19 @@ def show_suppliers_api():
 @app.route('/api/sales')
 def show_sales_api():
 	cur = mysql.connection.cursor()
-	cur.execute('''SELECT sale_id, prod_name, day, date, qtySold, salePrice FROM product, sales WHERE product.prod_id = sales.prod_id ''')
-	entries = [dict(sale_id=row[0], prod_name=row[1], day = row[2], date = str(row[3]), qtySold = row[4], salePrice = str(row[5])) for row in cur.fetchall()]
+	cur.execute('''SELECT sale_id, prod_name, day, date, qtySold, salePrice FROM product, \
+        sales WHERE product.prod_id = sales.prod_id ''')
+	entries = [dict(sale_id=row[0], prod_name=row[1], day = row[2], date = str(row[3]),\
+        qtySold = row[4], salePrice = str(row[5])) for row in cur.fetchall()]
     	return jsonify(sales=entries)
 
 @app.route('/api/purchases')
 def show_purchases_api():
 	cur = mysql.connection.cursor()
-	cur.execute('''SELECT purchase_id, prod_name, date, quantity, cost, totalCost from purchases, product WHERE purchases.prod_id = product.prod_id order by purchase_id''')
-	entries = [dict(purchase_id=row[0], prod_name=row[1], date = str(row[2]), quantity = row[3], cost = str(row[4]), totalCost = str(row[5])) for row in cur.fetchall()]
+	cur.execute('''SELECT purchase_id, prod_name, date, quantity, cost, totalCost from \
+        purchases, product WHERE purchases.prod_id = product.prod_id order by purchase_id''')
+	entries = [dict(purchase_id=row[0], prod_name=row[1], date = str(row[2]), \
+        quantity = row[3], cost = str(row[4]), totalCost = str(row[5])) for row in cur.fetchall()]
     	return jsonify(purchases=entries)
 
 if __name__ == '__main__':
