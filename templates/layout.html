@@ -173,16 +173,15 @@
 
           $("#app").html(homeTemplate({}));
 
-          $("#backBtn").click(function(){
-            $.get('/', function(){
-              $("#app").html(homeTemplate({}));
-            });
-          });
+
 
           $("#products").click(function(){
             $.get('/api/products', function(data){
               var html = prodTemplate({ products : data.products});
               $("#app").html(html);
+              $("#backBtn").click(function(){
+                  loadApp();
+              });
             });
           });
 
@@ -190,6 +189,9 @@
             $.get('/api/categories', function(data){
               var html = catTemplate({ categories : data.categories});
               $("#app").html(html);
+              $("#backBtn").click(function(){
+                  loadApp();
+              });
             });
           });
 
@@ -197,6 +199,9 @@
             $.get('/api/suppliers', function(data){
               var html = suppTemplate({ suppliers : data.suppliers});
               $("#app").html(html);
+              $("#backBtn").click(function(){
+                  loadApp();
+              });
             });
           });
 
@@ -204,6 +209,9 @@
             $.get('/api/sales', function(data){
               var html = saleTemplate({ sales : data.sales});
               $("#app").html(html);
+              $("#backBtn").click(function(){
+                  loadApp();
+              });
             });
           });
 
@@ -211,6 +219,9 @@
             $.get('/api/purchases', function(data){
               var html = purchaseTemplate({ purchases : data.purchases});
               $("#app").html(html);
+              $("#backBtn").click(function(){
+                  loadApp();
+              });
             });
           });
         }
