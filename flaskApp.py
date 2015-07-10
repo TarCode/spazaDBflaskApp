@@ -92,7 +92,7 @@ def show_categories():
     if request.method == 'POST':
     	if(request.form['cat_name'] != ""):
     			cur = mysql.connection.cursor()
-    			cur.execute('''INSERT INTO category VALUES (%s) ''' %(request.form['cat_name']))
+    			cur.execute('''INSERT INTO category SET cat_name = \"%s\" ''' %(request.form['cat_name']))
     			mysql.connection.commit()
     			return redirect(url_for('show_categories'))
         else:
@@ -106,12 +106,24 @@ def show_categories():
         	entries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
             	return render_template('show_categories.html', entries=entries)
 
-@app.route('/suppliers')
+@app.route('/suppliers', methods=['GET', 'POST'])
 def show_suppliers():
-	cur = mysql.connection.cursor()
-	cur.execute('''SELECT * FROM supplier''')
-	entries = [dict(supplier_id=row[0], supplier_name=row[1]) for row in cur.fetchall()]
-    	return render_template('show_suppliers.html', entries=entries)
+    if request.method == 'POST':
+    	if(request.form['supplier_name'] != ""):
+    			cur = mysql.connection.cursor()
+    			cur.execute('''INSERT INTO supplier SET supplier_name = \"%s\" ''' %(request.form['supplier_name']))
+    			mysql.connection.commit()
+    			return redirect(url_for('show_suppliers'))
+        else:
+                cur = mysql.connection.cursor()
+            	cur.execute('''SELECT * FROM supplier''')
+            	entries = [dict(supplier_id=row[0], supplier_name=row[1]) for row in cur.fetchall()]
+                return render_template('show_suppliers.html', entries=entries, msg = "field cannot be blank")
+    else:
+        	cur = mysql.connection.cursor()
+        	cur.execute('''SELECT * FROM supplier''')
+        	entries = [dict(supplier_id=row[0], supplier_name=row[1]) for row in cur.fetchall()]
+            	return render_template('show_suppliers.html', entries=entries)
 
 @app.route('/sales')
 def show_sales():
