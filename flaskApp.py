@@ -64,12 +64,28 @@ def login():
 def show_menu():
     return render_template('menu.html')
 
-@app.route('/products')
+@app.route('/products', methods=['GET', 'POST'])
 def show_products():
-	cur = mysql.connection.cursor()
-	cur.execute('''SELECT * FROM product''')
-	entries = [dict(prod_id=row[0], prod_name=row[1], cat_id=row[2]) for row in cur.fetchall()]
-    	return render_template('show_products.html', entries=entries)
+    if request.method == 'POST':
+    	if(request.form['prod_name'] != ""):
+    			cur = mysql.connection.cursor()
+    			cur.execute('''INSERT INTO product SET prod_name = %s, cat_id = %s''', (request.form['prod_name'], request.form["cat_id"] ))
+    			mysql.connection.commit()
+    			return redirect(url_for('show_products'))
+        else:
+                cur = mysql.connection.cursor()
+            	cur.execute('''SELECT * FROM product''')
+            	entries = [dict(prod_id=row[0], prod_name=row[1], cat_id=row[2]) for row in cur.fetchall()]
+                cur.execute('''SELECT * FROM category''')
+                catEntries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
+            	return render_template('show_products.html', entries=entries, catEntries = catEntries, msg = "field cannot be blank")
+    else:
+        	cur = mysql.connection.cursor()
+        	cur.execute('''SELECT * FROM product''')
+        	entries = [dict(prod_id=row[0], prod_name=row[1], cat_id=row[2]) for row in cur.fetchall()]
+                cur.execute('''SELECT * FROM category''')
+                catEntries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
+                return render_template('show_products.html', entries=entries, catEntries = catEntries)
 
 @app.route('/categories', methods=['GET', 'POST'])
 def show_categories():

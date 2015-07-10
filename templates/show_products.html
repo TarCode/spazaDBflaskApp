@@ -2,11 +2,17 @@
 {% extends "layout.html" %}
 {% block body %}
   <div class = "container">
-  <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
-  <form class = "loginForm text-center" action="/products" method = "post">
-    <input name = "prod_name" placeholder = "product name" type = "text"></input>
-    <button class = "btn btn-primary addBtn">Add</button>
-  </form>
+    <h3 class = "text-center">{{msg}}</h3>
+    <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+    <form class = "loginForm text-center" action="/products" method = "post">
+      <input name = "prod_name" placeholder = "product name" type = "text"></input>
+      <select name = "cat_id">
+        {% for cat in catEntries %}
+        <option value = "{{cat.cat_id}}">{{cat.cat_name}}</option>
+        {% endfor %}
+      </select>
+      <button class = "btn btn-primary addBtn">Add</button>
+    </form>
     <table class = "table table-bordered table-striped">
       <tr>
         <th>Product ID</th>
