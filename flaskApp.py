@@ -74,15 +74,15 @@ def show_products():
     			return redirect(url_for('show_products'))
         else:
                 cur = mysql.connection.cursor()
-            	cur.execute('''SELECT * FROM product''')
-            	entries = [dict(prod_id=row[0], prod_name=row[1], cat_id=row[2]) for row in cur.fetchall()]
+            	cur.execute('''SELECT prod_id, prod_name, cat_name FROM product, category WHERE product.cat_id = category.cat_id ORDER BY prod_id''')
+            	entries = [dict(prod_id=row[0], prod_name=row[1], cat_name=row[2]) for row in cur.fetchall()]
                 cur.execute('''SELECT * FROM category''')
                 catEntries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
             	return render_template('show_products.html', entries=entries, catEntries = catEntries, msg = "field cannot be blank")
     else:
         	cur = mysql.connection.cursor()
-        	cur.execute('''SELECT * FROM product''')
-        	entries = [dict(prod_id=row[0], prod_name=row[1], cat_id=row[2]) for row in cur.fetchall()]
+        	cur.execute('''SELECT prod_id, prod_name, cat_name FROM product, category WHERE product.cat_id = category.cat_id ORDER BY prod_id''')
+                entries = [dict(prod_id=row[0], prod_name=row[1], cat_name=row[2]) for row in cur.fetchall()]
                 cur.execute('''SELECT * FROM category''')
                 catEntries = [dict(cat_id=row[0], cat_name=row[1]) for row in cur.fetchall()]
                 return render_template('show_products.html', entries=entries, catEntries = catEntries)
