@@ -2,7 +2,12 @@
 {% extends "layout.html" %}
 {% block body %}
   <div class = "container">
-  <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+    <h3 class = "text-center">{{msg}}</h3>
+    <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+    <form class = "loginForm text-center" action="/categories" method = "post">
+  		<input name = "cat_name" placeholder = "category name" type = "text"></input>
+  		<button class = "btn btn-primary addBtn">Add</button>
+  	</form>
     <table class = "table table-bordered table-striped">
       <tr>
         <th>Category ID</th>
@@ -17,8 +22,8 @@
       <em>Unbelievable.  No entries here so far</em>
     {% endfor %}
     </table>
-  
-    
+
+
   </div>
 {% endblock %}
 {% endif %}

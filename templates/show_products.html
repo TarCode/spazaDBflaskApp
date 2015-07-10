@@ -3,6 +3,10 @@
 {% block body %}
   <div class = "container">
   <a class="btn btn-default backBtn" href="/menu" role="button">Back</a>
+  <form class = "loginForm text-center" action="/products" method = "post">
+    <input name = "prod_name" placeholder = "product name" type = "text"></input>
+    <button class = "btn btn-primary addBtn">Add</button>
+  </form>
     <table class = "table table-bordered table-striped">
       <tr>
         <th>Product ID</th>
@@ -19,8 +23,8 @@
       <em>Unbelievable.  No entries here so far</em>
     {% endfor %}
     </table>
-  
-    
+
+
   </div>
 {% endblock %}
 {% endif %}
