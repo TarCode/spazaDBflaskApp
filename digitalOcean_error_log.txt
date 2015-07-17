@@ -1,0 +1,17 @@
+sudo nano /etc/nginx/sites-available/flaskApp
+
+server {
+    listen 80;
+    server_name apps.projectcodex.co;
+
+    location /app1 {
+        include proxy_params;
+        proxy_pass http://unix:/home/tarcode/apps/spazaDBflaskApp/myproject.sock;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/flaskApp /etc/nginx/sites-enabled
+
+(spazaproenv)tarcode@shanti:~/apps/spazaDBflaskApp$ gunicorn --bind 0.0.0.0:5000 flaskApp:app
+
+gunicorn --workers 3 --bind unix:myproject.sock -m 007 flaskApp:app

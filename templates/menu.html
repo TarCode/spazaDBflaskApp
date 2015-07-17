@@ -1,26 +1,26 @@
 {% if session['name'] %}
 {% extends "layout.html" %}
 {% block body %}
-<div class = "row">
-	<div class = "col-xs-12 col-md-4">
-		<a class="btn btn-primary tblBtn" href="/products" role="button">Products</a>
+<div class = "row salePanel">
+	<div class = "col-xs-12 col-md-12">
+		<a class="btn btn-primary tblBtn saleBtn" href="/sales" role="button">SALES</a>
 	</div>
-	<div class = "col-xs-12 col-md-4">
-		<a class="btn btn-success tblBtn" href="/categories" role="button">Categories</a>
-	</div>
-	<div class = "col-xs-12 col-md-4">
-		<a class="btn btn-danger tblBtn" href="/suppliers" role="button">Suppliers</a>
-	</div>
-</div>	
 
-<div class = "row">
+</div>
+
+<div class = "row adminPanel">
 	<div class = "col-xs-12 col-md-6">
-		<a class="btn btn-primary tblBtn" href="/sales" role="button">Sales</a>
+		<a class="btn btn-success tblBtn prodBtn" href="/products" role="button">PRODUCTS</a>
 	</div>
 	<div class = "col-xs-12 col-md-6">
-		<a class="btn btn-success tblBtn" href="/purchases" role="button">Purchases</a>
+		<a class="btn btn-success tblBtn catBtn" href="/categories" role="button">CATEGORIES</a>
 	</div>
-</div>	
-
+	<div class = "col-xs-12 col-md-6">
+		<a class="btn btn-success tblBtn purchBtn" href="/purchases" role="button">PURCHASES</a>
+	</div>
+	<div class = "col-xs-12 col-md-6">
+		<a class="btn btn-success tblBtn suppBtn" href="/suppliers" role="button">SUPPLIERS</a>
+	</div>
+</div>
 {% endblock %}
 {% endif %}

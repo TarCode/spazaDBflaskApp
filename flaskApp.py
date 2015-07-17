@@ -19,7 +19,10 @@ app.config['MYSQL_DB'] = 'nelisaFlask'
 
 @app.route('/')
 def show_landing():
-    return render_template('land.html')
+    if session:
+        return redirect(url_for('show_menu'))
+    else:
+        return render_template('land.html')
 
 @app.route('/signUp', methods = ['GET', 'POST'])
 def signUp():
@@ -128,15 +131,15 @@ def show_suppliers():
 @app.route('/sales')
 def show_sales():
 	cur = mysql.connection.cursor()
-	cur.execute('''SELECT sale_id, prod_name, day, date, qtySold, salePrice FROM product, sales WHERE product.prod_id = sales.prod_id ''')
-	entries = [dict(sale_id=row[0], prod_name=row[1], day = row[2], date = row[3], qtySold = row[4], salePrice = row[5]) for row in cur.fetchall()]
+	cur.execute('''SELECT sale_id, prod_name, date, qtySold, salePrice FROM product, sales WHERE product.prod_id = sales.prod_id ''')
+	entries = [dict(sale_id=row[0], prod_name=row[1], date = row[2], qtySold = row[3], salePrice = row[4]) for row in cur.fetchall()]
     	return render_template('show_sales.html', entries=entries)
 
 @app.route('/purchases')
 def show_purchases():
 	cur = mysql.connection.cursor()
-	cur.execute('''SELECT purchase_id, prod_name, date, quantity, cost, totalCost from purchases, product WHERE purchases.prod_id = product.prod_id order by purchase_id''')
-	entries = [dict(purchase_id=row[0], prod_name=row[1], date = row[2], quantity = row[3], cost = row[4], totalCost = row[5]) for row in cur.fetchall()]
+	cur.execute('''SELECT purchase_id, prod_name, date, quantity, cost from purchases, product WHERE purchases.prod_id = product.prod_id order by purchase_id''')
+	entries = [dict(purchase_id=row[0], prod_name=row[1], date = row[2], quantity = row[3], cost = row[4]) for row in cur.fetchall()]
     	return render_template('show_purchases.html', entries=entries)
 
 @app.route('/clear')

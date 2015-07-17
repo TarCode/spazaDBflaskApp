@@ -7,7 +7,6 @@
       <tr>
         <th>Sale ID</th>
         <th>Product Name</th>
-        <th>Day</th>
         <th>Date</th>
         <th>Number Sold</th>
         <th>Sale Price</th>
@@ -16,7 +15,6 @@
       <tr>
         <td>{{ entry.sale_id }}</td>
         <td>{{ entry.prod_name}}</td>
-        <td>{{ entry.day}}</td>
         <td>{{ entry.date}}</td>
         <td>{{ entry.qtySold}}</td>
         <td>{{ entry.salePrice}}</td>
@@ -25,8 +23,8 @@
       <em>Unbelievable.  No entries here so far</em>
     {% endfor %}
     </table>
-  
-    
+
+
   </div>
 {% endblock %}
 {% endif %}

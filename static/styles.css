@@ -1,5 +1,5 @@
 body{
-	background-color: #5b5494;
+	background-color: #4925B7;
 	color: #0D083B;
 }
 .addBtn{
@@ -11,12 +11,18 @@ body{
 }
 .tblBtn{
 	width: 100%;
-	height: 7em;
+	height: 6em;
 	padding-top: 2.5em;
+	padding: 1em;
 	font-size: 1.5em;
 	font-weight: bold;
 	margin-bottom: 1em;
 	border-radius: 0px;
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: left;
+	background-size: contain;
+	text-align: right;
 }
 
 .backBtn{
@@ -73,17 +79,17 @@ strong{
 }
 
 .btn-primary{
-	background-color: #554200;
+	background-color: #B69804;
 	border: 0px;
 }
 
 .btn-success{
-	background-color: #806815;
+	background-color: #B65004;
 	border: 0px;
 }
 
 .btn-danger{
-	background-color: #AA9139;
+	background-color: #2C117D;
 	border: 0px;
 }
 
@@ -102,6 +108,36 @@ strong{
 	background-color: #fff;
 }
 
+.salePanel{
+	background-color: #5734C0;
+	padding: 2em;
+	padding-bottom: 1em;
+}
+.adminPanel{
+	background-color: #321391;
+	padding: 2em;
+	padding-bottom: 1em;
+}
+
+.saleBtn{
+	background-image: url('./img/sales.png');
+}
+
+.purchBtn{
+	background-image: url('./img/purchases.png');
+}
+
+.prodBtn{
+	background-image: url('./img/products.png');
+}
+
+.catBtn{
+	background-image: url('./img/categories.png');
+}
+
+.suppBtn{
+	background-image: url('./img/suppliers.png');
+}
 @media screen and (max-width:640px){
 	body{
 		font-size: 150%;
